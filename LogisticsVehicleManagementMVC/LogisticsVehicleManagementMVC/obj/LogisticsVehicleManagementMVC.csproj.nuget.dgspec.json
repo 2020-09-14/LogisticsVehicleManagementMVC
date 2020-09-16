@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\T\\Desktop\\MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj": {}
+    "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\T\\Desktop\\MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj": {
+    "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\T\\Desktop\\MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj",
+        "projectUniqueName": "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj",
         "projectName": "LogisticsVehicleManagementMVC",
-        "projectPath": "C:\\Users\\T\\Desktop\\MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj",
+        "projectPath": "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj",
         "packagesPath": "C:\\Users\\T\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\T\\Desktop\\MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\obj\\",
+        "outputPath": "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -40,6 +40,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
