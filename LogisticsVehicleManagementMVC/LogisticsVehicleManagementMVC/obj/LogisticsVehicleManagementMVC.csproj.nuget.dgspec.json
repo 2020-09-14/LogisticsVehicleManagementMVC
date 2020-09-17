@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj": {}
+    "C:\\Users\\86176\\Desktop\\新建文件夹 (3)\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj": {
+    "C:\\Users\\86176\\Desktop\\新建文件夹 (3)\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj",
+        "projectUniqueName": "C:\\Users\\86176\\Desktop\\新建文件夹 (3)\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj",
         "projectName": "LogisticsVehicleManagementMVC",
-        "projectPath": "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj",
-        "packagesPath": "C:\\Users\\T\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\obj\\",
+        "projectPath": "C:\\Users\\86176\\Desktop\\新建文件夹 (3)\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj",
+        "packagesPath": "C:\\Users\\86176\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\86176\\Desktop\\新建文件夹 (3)\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\T\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\86176\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
