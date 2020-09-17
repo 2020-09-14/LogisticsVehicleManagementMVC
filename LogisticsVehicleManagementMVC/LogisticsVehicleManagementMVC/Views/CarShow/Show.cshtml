@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "Show";
+}
+
+<h1>Show</h1>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<input id="Button1" type="button" value="添加" onclick="location.href='/CarShow/CarAdd'" />
+<table class="table table-bordered table-hover">
+    <tr>
+        <td>
+            车牌号
+        </td>
+
+        <td>
+            车辆型号
+        </td>
+
+
+        <td>
+            生产厂商
+        </td>
+
+
+        <td>
+            颜色
+        </td>
+
+
+        <td>
+            新车购置价
+        </td>
+
+
+        <td>
+            吨位
+        </td>
+
+
+        <td>
+            功率排气量
+        </td>
+
+
+        <td>
+            车辆种类
+        </td>
+
+        <td>
+            操作
+        </td>
+
+    </tr>
+    <tbody id="tb">
+    </tbody>
+</table>
+<script>
+    //显示车辆
+    $(function () {
+        Show();
+    })
+    function Show() {
+        $.ajax({
+            url: 'http://localhost:8648/api/Show',
+            type: 'get',
+            dataType: 'json',
+            success: function (d) {
+                $(d).each(function () {
+                    var line = '<tr>'
+                        + '<td>' + this.Licenseplatenumber + '</td>'
+                        + '<td>' + this.ModelofCar + '</td>'
+                        + '<td>' + this.Manufacturer + '</td>'
+                        + '<td>' + this.CarColour + '</td>'
+                        + '<td>' + this.PurchasePrice + '</td>'
+                        + '<td>' + this.Tonnage + '</td>'
+                        + '<td>' + this.Displacement + '</td>'
+                        + '<td>' + this.VehicleType + '</td>'
+                        + '<td><input id="Button1" type="button" value="删除" /></td>'
+                        + '</tr>'
+                    $('#tb').append(line);
+                })
+            }
+        })
+    }
+</script>
