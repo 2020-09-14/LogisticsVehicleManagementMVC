@@ -1,75 +1,120 @@
-﻿
+﻿<!DOCTYPE html>
 @{
     ViewData["Title"] = "Show";
 }
+<html>
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <style type="text/css">
 
-<h1>Show</h1>
+        .sellTable {
+            border: 1px solid #CCE6F7;
+            border-collapse: collapse;
+        }
 
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-<input id="Button1" type="button" value="添加" onclick="location.href='/CarShow/CarAdd'" />
-<table class="table table-bordered table-hover">
-    <tr>
-        <td>
-            车牌号
-        </td>
+            .sellTable caption {
+                border: 1px solid darkblue;
+                padding: 9px;
+            }
 
-        <td>
-            车辆型号
-        </td>
+            .sellTable th {
+                border: 1px solid blue;
+                padding: 6px;
+            }
 
+            .sellTable td {
+                border: 1px solid brown;
+                padding: 5px;
+                text-align: center
+            }
+    </style>
+</head>
+<body>
+    <h1>Show</h1>
+    <input id="Button1" class="btn btn-primary btn-lg" type="button" value="添加" onclick="location.href='/CarShow/CarAdd'" />
+    <div>
+        车牌号 <input type="text" id="tetName" /><input type="button" value="查询" onclick="Show()" /><input type="button" value="全部删除" class="btn btn-primary btn-lg" onclick="delAll()" />
+    </div>
+    <table class="table table-bordered table table-striped">
+        <tr>
+            <td>
+                <input type="button" value="全选反选" id="id" />
+            </td>
+            <td>
+                车牌号
+            </td>
 
-        <td>
-            生产厂商
-        </td>
-
-
-        <td>
-            颜色
-        </td>
-
-
-        <td>
-            新车购置价
-        </td>
-
-
-        <td>
-            吨位
-        </td>
-
-
-        <td>
-            功率排气量
-        </td>
+            <td>
+                车辆型号
+            </td>
 
 
-        <td>
-            车辆种类
-        </td>
+            <td>
+                生产厂商
+            </td>
 
-        <td>
-            操作
-        </td>
 
-    </tr>
-    <tbody id="tb">
-    </tbody>
-</table>
+            <td>
+                颜色
+            </td>
+
+
+            <td>
+                新车购置价
+            </td>
+
+
+            <td>
+                吨位
+            </td>
+
+
+            <td>
+                功率排气量
+            </td>
+
+
+            <td>
+                车辆种类
+            </td>
+
+            <td>
+                操作
+            </td>
+
+        </tr>
+        <tbody id="tb">
+        </tbody>
+    </table>
+</body>
+
+</html>
 <script>
     //显示车辆
     $(function () {
         Show();
+        $("#id").click(function () {
+            $(".ck").each(function () {
+
+                $(this).attr("checked", !$(this).attr("checked"))
+            })
+
+        })
     })
     function Show() {
         $.ajax({
             url: 'http://localhost:8648/api/Show',
             type: 'get',
+            data: { name: $('#tetName').val() },
+            //ContentType:'application/json',
             dataType: 'json',
             success: function (d) {
+                $('#tb').empty();
                 $(d).each(function () {
                     var line = '<tr>'
+                        + '<td><input class="ck" type="checkbox"   value="' + this.VehicleManageId + '" /></td>'
                         + '<td>' + this.Licenseplatenumber + '</td>'
                         + '<td>' + this.ModelofCar + '</td>'
                         + '<td>' + this.Manufacturer + '</td>'
@@ -78,11 +123,59 @@
                         + '<td>' + this.Tonnage + '</td>'
                         + '<td>' + this.Displacement + '</td>'
                         + '<td>' + this.VehicleType + '</td>'
-                        + '<td><input id="Button1" type="button" value="删除" /></td>'
+                        + '<td><input id="Button1" type="button" value="删除" onclick="Del(' + this.VehicleManageId + ')"/><input id="Button1" type="button" value="编辑"onclick="Upt(' + this.VehicleManageId +')" /></td>'
                         + '</tr>'
                     $('#tb').append(line);
                 })
             }
         })
+    }
+    function Del(name) {
+        alert(name);
+        $.ajax({
+            url: 'http://localhost:8648/api/Delete',
+            type: "POST",
+            data:{ 'name': name },
+            accepts: "application/x-www-form-urlencoded",
+            contentType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                if (d == "yes") {
+                    alert('删除成功！');
+                    Show();
+                }
+                else {
+                    alert('删除失败！')
+                }
+            }
+        })
+
+    }
+    function delAll() {
+        var id = "";
+        //for (var i = 0; i < $(".ck").length; i++) {
+        //    if ($(".ck").eq(i).attr("checked") == "checked") {
+        //        id += $(".ck").eq(i).val() + ","
+        //    }
+        //}
+        $('input[Class="ck"]:checked').each(function () {
+
+            id += $(this).val() + ',';
+
+            //Ids += ',';
+        });
+        if (id == "") {
+            alert("请选择删除项")
+            return false;
+
+        }
+        else {
+            if (!confirm("是否删除选择项")) return true;
+        }
+        id = id.substring(0, id.length - 1);
+        //alert(id);
+        Del(id);
+    }
+    function Upt(ids) {
+        location.href = "/CarShow/CarAdd?ids=" + ids;
     }
 </script>

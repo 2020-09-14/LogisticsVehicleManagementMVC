@@ -1,61 +1,84 @@
-﻿
+﻿<!DOCTYPE html>
 @{
     ViewData["Title"] = "CarAdd";
 }
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-<h1>CarAdd</h1>
-<table class="table table-bordered">
-    <tr>
-        <td>车牌号</td>
-        <td><input type="text" id="Licenseplatenumber" /></td>
-    </tr>
-    <tr>
-        <td>车辆型号</td>
-        <td><input type="text" id="ModelofCar" /></td>
-    </tr>
-    <tr>
-        <td>生产厂商</td>
-        <td><input type="text" id="Manufacturer" /></td>
-    </tr>
-    <tr>
-        <td>颜色</td>
-        <td><input type="text" id="CarColour" /></td>
-    </tr>
-    <tr>
-        <td>新车购置价</td>
-        <td><input type="text" id="PurchasePrice" /></td>
-    </tr>
-    <tr>
-        <td>吨位</td>
-        <td><input type="text" id="Tonnage" /></td>
-    </tr>
-    <tr>
-        <td>功率排气量</td>
-        <td><input type="text" id="Displacement" /></td>
-    </tr>
-    <tr>
-        <td>车辆种类</td>
-        <td>
-            <select id="VehicleType">
-                <option value="卡车">卡车</option>
-                <option value="重型车">重型车</option>
-                <option value="跑车">跑车</option>
-                <option value="飞机">飞机</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <input type="button" value="提交" onclick="Addcar()" />
-        </td>
-    </tr>
-</table>
+<html>
+<head>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script>
+
+    </script>
+</head>
+<body>
+    <h1>CarAdd</h1>
+    
+    <input id="Hidden1" type="hidden" value="@ViewBag.ls" />
+    <table class="table table-bordered table-info">
+        <tr>
+            <td>车牌号</td>
+            <td><input type="text" id="Licenseplatenumber" /></td>
+        </tr>
+        <tr>
+            <td>车辆型号</td>
+            <td><input type="text" id="ModelofCar" /></td>
+        </tr>
+        <tr>
+            <td>生产厂商</td>
+            <td><input type="text" id="Manufacturer" /></td>
+        </tr>
+        <tr>
+            <td>颜色</td>
+            <td><input type="text" id="CarColour" /></td>
+        </tr>
+        <tr>
+            <td>新车购置价</td>
+            <td><input type="text" id="PurchasePrice" /></td>
+        </tr>
+        <tr>
+            <td>吨位</td>
+            <td><input type="text" id="Tonnage" /></td>
+        </tr>
+        <tr>
+            <td>功率排气量</td>
+            <td><input type="text" id="Displacement" /></td>
+        </tr>
+        <tr>
+            <td>车辆种类</td>
+            <td>
+                <select id="VehicleType">
+                    <option value="卡车">卡车</option>
+                    <option value="重型车">重型车</option>
+                    <option value="跑车">跑车</option>
+                    <option value="飞机">飞机</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" id="add" value="提交" class="btn btn-primary btn-lg"  onclick="Addcar()" />
+                <input type="button" id="upt" value="修改" class="btn btn-primary btn-lg"  onclick="CarUpt()" />
+            </td>
+        </tr>
+    </table>
+</body>
+    
+</html>
 <script>
+    $(function () {
+        CarTian();
+        if ($("#Hidden1").val() != "") {
+            $("#add").hide();
+        }
+        else {
+            $("#upt").hide();
+        }
+    })
     //添加车辆
     function Addcar() {
         var VehicleManage = {};
-        alert(1);
+        
         VehicleManage.Licenseplatenumber = $("#Licenseplatenumber").val();
 
         VehicleManage.ModelofCar = $("#ModelofCar").val();
@@ -79,6 +102,7 @@
             success: function (d) {
                 if (d > 0) {
                     alert('添加成功！')
+                    location.href ="/CarShow/Show"
                 }
                 else {
                     alert('添加失败')
@@ -93,5 +117,66 @@
 
 
 
+    }
+    //反填
+    function CarTian() {
+        $.ajax({
+            url: 'http://localhost:8648/api/CarTian',
+            type: 'get',
+            data: { ids: $("#Hidden1").val() },
+            dataType: 'json',
+            success: function (d) {
+                  $("#Licenseplatenumber").val(d[0].Licenseplatenumber);
+                  $("#ModelofCar").val(d[0].ModelofCar );
+                //alert(VehicleManage.ModelofCar);
+                  $("#Manufacturer").val(d[0].Manufacturer);
+                //alert(VehicleManage.Manufacturer);
+                  $("#CarColour").val(d[0].CarColour);
+                //alert(VehicleManage.CarColour);
+                  $("#PurchasePrice").val(d[0].PurchasePrice);
+                //alert(VehicleManage.PurchasePrice);
+                  $("#Tonnage").val(d[0].Tonnage);
+                //alert(VehicleManage.Tonnage);
+                  $("#Displacement").val(d[0].Displacement);
+                //alert(VehicleManage.Displacement);
+                  $("#VehicleType").val(d[0].VehicleType);
+            }
+        })
+    }
+    //修改
+    function CarUpt() {
+        var VehicleManage = {};
+        VehicleManage.VehicleManageId = $("#Hidden1").val();
+        alert(VehicleManage.VehicleManageId);
+        VehicleManage.Licenseplatenumber = $("#Licenseplatenumber").val();
+
+        VehicleManage.ModelofCar = $("#ModelofCar").val();
+        //alert(VehicleManage.ModelofCar);
+        VehicleManage.Manufacturer = $("#Manufacturer").val();
+        //alert(VehicleManage.Manufacturer);
+        VehicleManage.CarColour = $("#CarColour").val();
+        //alert(VehicleManage.CarColour);
+        VehicleManage.PurchasePrice = $("#PurchasePrice").val();
+        //alert(VehicleManage.PurchasePrice);
+        VehicleManage.Tonnage = $("#Tonnage").val();
+        //alert(VehicleManage.Tonnage);
+        VehicleManage.Displacement = $("#Displacement").val();
+        //alert(VehicleManage.Displacement);
+        VehicleManage.VehicleType = $("#VehicleType").val();
+        //alert(VehicleManage.VehicleType);
+        $.ajax({
+            url: 'http://localhost:8648/api/CarUpt',
+            data: VehicleManage,
+            type: 'Post',
+            success: function (d) {
+                if (d > 0) {
+                    alert('修改成功！')
+                    location.href = "/CarShow/Show";
+                }
+                else {
+                    alert('修改失败')
+                }
+            }
+        })
     }
 </script>

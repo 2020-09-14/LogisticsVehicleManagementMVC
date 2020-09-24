@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Group\Tiantengfei\" />
+    <Folder Include="Group\Wangchao\" />
+    <Folder Include="Group\Zhangchunyv\" />
+    <Folder Include="Group\Shenwenjie\" />
+    <Folder Include="Group\Liukang\" />
+    <Folder Include="Group\Guokunlong\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="sqlSugarCore" Version="5.0.0.15" />
+  </ItemGroup>
+
+</Project>

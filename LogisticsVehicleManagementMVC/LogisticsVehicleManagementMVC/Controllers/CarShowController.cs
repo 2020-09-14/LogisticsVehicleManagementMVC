@@ -13,8 +13,22 @@ namespace LogisticsVehicleManagementMVC.Controllers
         {
             return View();
         }
-        public IActionResult CarAdd()
+        public IActionResult CarAdd(string ids)
         {
+            ViewBag.ls = ids;
+            return View();
+        }
+        public IActionResult CarUpt()
+        {
+            return View();
+        }
+        public IActionResult Motorcade()
+        {
+            return View();
+        }
+        public IActionResult MotorcadeAdd(string ids)
+        {
+            ViewBag.ls = ids;
             return View();
         }
     }

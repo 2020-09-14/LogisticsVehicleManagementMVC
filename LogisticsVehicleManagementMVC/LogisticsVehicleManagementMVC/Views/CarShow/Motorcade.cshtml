@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+@{
+    ViewData["Title"] = "Motorcade";
+}
+<html>
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+</head>
+<body>
+    <h1>Motorcade</h1>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                      车辆
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table table-striped">
+                        <tr>
+                            
+                            <td>
+                                车牌号
+                            </td>
+
+                            <td>
+                                车辆型号
+                            </td>
+
+
+                            <td>
+                                生产厂商
+                            </td>
+
+
+                            <td>
+                                颜色
+                            </td>
+
+
+                            <td>
+                                新车购置价
+                            </td>
+
+
+                            <td>
+                                吨位
+                            </td>
+
+
+                            <td>
+                                功率排气量
+                            </td>
+
+
+                            <td>
+                                车辆种类
+                            </td>
+
+                           
+
+                        </tr>
+                        <tbody id="tbb">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        关闭
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        提交更改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <input type="button" value="全部删除" class="btn btn-primary btn-lg"  onclick="delAll()" />
+    <input id="Button1" type="button" value="添加车队" class="btn btn-primary btn-lg"  href="/CarShow/MotorcadeAdd" />
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td>
+                <input type="button" value="全选反选" id="id" />
+            </td>
+            <td>
+                车队编号
+            </td>
+            <td>
+                车队称号
+            </td>
+            <td>
+                负责人姓名
+            </td>
+            <td>
+                负责人电话
+            </td>
+            <td>
+                车队人数
+            </td>
+            <td>
+                车辆数
+            </td>
+            <td>
+                操作
+            </td>
+        </tr>
+        <tbody id="tb">
+        </tbody>
+    </table>
+</body>
+
+</html>
+<script>
+    $(function () {
+        Show();
+        $("#id").click(function () {
+            $(".ck").each(function () {
+
+                $(this).attr("checked", !$(this).attr("checked"))
+            })
+
+        })
+    })
+    function Show() {
+        $.ajax({
+            url: 'http://localhost:8648/api/Dshow',
+            type: 'get',
+            //data: { name: $('#tetName').val() },
+            //ContentType:'application/json',
+            dataType: 'json',
+            success: function (d) {
+                $('#tb').empty();
+                $(d).each(function () {
+                    var line = '<tr>'
+                        + '<td><input type="checkbox"  class="ck" value="' + this.FleetManagementId + '" /></td>'
+                        + '<td>' + this.Serialnumber+ '</td>'
+                        + '<td>' + this.TheteamName+ '</td>'
+                        + '<td>' + this.Principal+ '</td>'
+                        + '<td>' + this.PrincipalPhone+ '</td>'
+                        + '<td>' + this.PersonNumber+ '名</td>'
+                        + '<td>' + this.vehicles + '辆</td>'
+                        + '<td><input class="btn btn-primary btn-lg"  id="Button1" type="button" value="删除" onclick="Del(' + this.FleetManagementId + ')"/><input class="btn btn-primary btn-lg"  id="Button1" type="button" value="编辑" onclick="Upt(' + this.FleetManagementId + ')"  /> <input id="Button1" type="button" value="详情车辆" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="Xq(' + this.FleetManagementId + ')"  /></td>'
+                        + '</tr>'
+                    $('#tb').append(line);
+                })
+            }
+        })
+    }
+    function Del(ids) {
+
+        $.ajax({
+            url: 'http://localhost:8648/api/Remove',
+            type: 'POST',
+            data: { 'name': ids },
+            accepts: "application/x-www-form-urlencoded",
+            contentType: "application/x-www-form-urlencoded",
+            //dataType: 'json',
+            success: function (d) {
+                if (d == "yes") {
+                    alert('删除成功！');
+                    location.href ="/CarShow/Motorcade"
+                }
+                else {
+                    alert('删除失败！');
+                }
+            }
+        })
+    }
+    function delAll() {
+        var id = "";
+        //for (var i = 0; i < $(".ck").length; i++) {
+        //    if ($(".ck").eq(i).attr("checked") == "checked") {
+        //        id += $(".ck").eq(i).val() + ","
+        //    }
+        //}
+        $('input[Class="ck"]:checked').each(function () {
+
+            id += $(this).val() + ',';
+
+            //Ids += ',';
+        });
+        if (id == "") {
+            alert("请选择删除项")
+            return false;
+
+        }
+        else {
+            if (!confirm("是否删除选择项")) return true;
+        };
+        id = id.substring(0, id.length - 1);
+        Del(id);
+    }
+    function Upt(ids) {
+        location.href = "/CarShow/MotorcadeAdd?ids=" + ids; 
+    }
+    function Xq(ids) {
+        $.ajax({
+            url: 'http://localhost:8648/api/Xq',
+            type: 'get',
+            data: { ids: ids },
+            //ContentType:'application/json',
+            dataType: 'json',
+            success: function (d) {
+                $('#tbb').empty();
+                $(d).each(function () {
+                    var line = '<tr>'
+                        + '<td>' + this.Licenseplatenumber + '</td>'
+                        + '<td>' + this.ModelofCar + '</td>'
+                        + '<td>' + this.Manufacturer + '</td>'
+                        + '<td>' + this.CarColour + '</td>'
+                        + '<td>' + this.PurchasePrice + '</td>'
+                        + '<td>' + this.Tonnage + '</td>'
+                        + '<td>' + this.Displacement + '</td>'
+                        + '<td>' + this.VehicleType + '</td>'                   
+                        + '</tr>'
+                    $('#tbb').append(line);
+                })
+            }
+        })
+    
+    }
+</script>
