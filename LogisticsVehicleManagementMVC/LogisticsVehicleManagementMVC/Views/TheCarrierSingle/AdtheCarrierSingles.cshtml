@@ -1,0 +1,159 @@
+﻿
+@{
+    Layout = null;
+}
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div style="width:100%;text-align:center">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">货物类型:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="TypeOfGoods" lay-verify="title" autocomplete="off" placeholder="请输入货物类型" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">承运钱款:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="Moneys" lay-verify="required" lay-reqtext="不挣钱了？吃啥？！！！" placeholder="请输入Money" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">承运车队:</label>
+            <div class="layui-input-inline">
+                <select name="TheCarrierFleet" id="quiz1">
+                    <option value=""></option>
+                </select>
+
+            </div>
+            <label class="layui-form-label">承运车辆:</label>
+            <div class="layui-input-inline">
+
+                <select name="TheCarrierVehicle" id="quiz2">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">驾驶员:</label>
+            <div class="layui-input-inline">
+
+                <select name="DriversName" id="quiz3">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">发货人姓名:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="ConsignerName" lay-verify="title" autocomplete="off" placeholder="请输入发货人姓名" class="layui-input">
+            </div>
+            <label class="layui-form-label">发货人手机号:</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="ConsignerTel" lay-verify="required|phone" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">发货人地址:</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" class="layui-textarea" name="ConsignerAddress"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">收货人姓名:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="ConsigneeName" lay-verify="title" autocomplete="off" placeholder="请输入发货人姓名" class="layui-input">
+            </div>
+            <label class="layui-form-label">收货人手机号:</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="ConsigneeTel" lay-verify="required|phone" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">收货人地址:</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" class="layui-textarea" name="ConsigneeAddress"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+    </div>
+    <script src="~/layui/layui.js"></script>
+    <script>
+        layui.use(['form', 'layedit', 'laydate'], function () {
+            var form = layui.form;
+            $.ajax({
+             url: 'http://localhost:8648/api/Dshow',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    $('#quiz1').append(new Option(item.TheteamName));// 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+                //重新渲染 固定写法
+            }
+        })
+            $.ajax({
+            url: 'http://localhost:8648/api/Show',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    $('#quiz2').append(new Option(item.ModelofCar));// 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+                //重新渲染 固定写法
+            }
+        })
+            $.ajax({
+                url: 'http://localhost:8648/api/DriverList/GetShow',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    $('#quiz3').append(new Option(item.Dname));// 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+                //重新渲染 固定写法
+            }
+        })
+
+
+            //监听提交
+            form.on('submit(demo1)', function (data) {
+              
+                
+                $.ajax({
+                    url: "http://localhost:8648/api/Add",
+                    type: "post",
+                    data:data.field,
+                    dataType: "json",
+                    success: function (d) {
+                        if (d > 0) {
+                            alert('添加成功！！！');
+                            window.location.href = "/TheCarrierSingle/GettheCarrierSingles";
+                        } else {
+                            return;
+                        }
+                    }
+                })
+                return false;
+            });
+            //表单取值
+            layui.$('#LAY-component-form-getval').on('click', function () {
+                var data = form.val('example');
+                alert(JSON.stringify(data));
+            });
+
+        });
+    </script>
+

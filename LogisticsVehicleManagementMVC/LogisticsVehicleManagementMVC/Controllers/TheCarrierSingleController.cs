@@ -12,5 +12,12 @@ namespace LogisticsVehicleManagementMVC.Controllers
         {
             return View();
         }
+
+     
+        public IActionResult AdtheCarrierSingles()
+        {
+            return View();
+        }
+       
     }
 }

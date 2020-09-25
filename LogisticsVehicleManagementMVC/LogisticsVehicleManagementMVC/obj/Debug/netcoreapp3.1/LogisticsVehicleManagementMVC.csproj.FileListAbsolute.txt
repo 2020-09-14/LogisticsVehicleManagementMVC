@@ -2,7 +2,6 @@ C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManag
 C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\bin\Debug\netcoreapp3.1\LogisticsVehicleManagementMVC.exe
-C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\LogisticsVehicleManagementMVC.csprojAssemblyReference.cache
 C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\LogisticsVehicleManagementMVC.AssemblyInfoInputs.cache
 C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\LogisticsVehicleManagementMVC.AssemblyInfo.cs
 C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\LogisticsVehicleManagementMVC.RazorAssemblyInfo.cache
@@ -108,6 +107,8 @@ C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManag
 C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\LogisticsVehicleManagementMVC.dll
 C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\LogisticsVehicleManagementMVC.pdb
 C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\LogisticsVehicleManagementMVC.genruntimeconfig.cache
+C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\Razor\Views\TheCarrierSingle\GettheCarrierSingles.cshtml.g.cs
+C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\Razor\Views\TheCarrierSingle\AdtheCarrierSingles.cshtml.g.cs
 C:\Users\86176\Desktop\新建文件夹 (3)\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\86176\Desktop\新建文件夹 (3)\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\86176\Desktop\新建文件夹 (3)\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
@@ -223,3 +224,7 @@ C:\Users\86176\Desktop\新建文件夹 (3)\LogisticsVehicleManagementMVC\Logisti
 C:\Users\86176\Desktop\新建文件夹 (3)\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\LogisticsVehicleManagementMVC.genruntimeconfig.cache
 C:\Users\86176\Desktop\新建文件夹 (3)\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\Razor\Views\CarShow\Motorcade.cshtml.g.cs
 C:\Users\86176\Desktop\新建文件夹 (3)\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\Razor\Views\CarShow\MotorcadeAdd.cshtml.g.cs
+C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\Razor\Views\CarShow\CarAdd.cshtml.g.cs
+C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\Razor\Views\CarShow\Motorcade.cshtml.g.cs
+C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\Razor\Views\CarShow\MotorcadeAdd.cshtml.g.cs
+C:\Users\T\Desktop\项目MVC\LogisticsVehicleManagementMVC\LogisticsVehicleManagementMVC\obj\Debug\netcoreapp3.1\Razor\Views\CarShow\Show.cshtml.g.cs
