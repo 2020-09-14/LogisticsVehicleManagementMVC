@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<h1>Add</h1>
+<table class="table table-active">
+    <tr>
+        <td>燃油成本:</td>
+        <td><input id="TextRan" type="text" /></td>
+    </tr>
+    <tr>
+        <td>修理成本:</td>
+        <td><input id="TextXiu" type="text" /></td>
+    </tr>
+    <tr>
+        <td>通行成本:</td>
+        <td><input id="TextTong" type="text" /></td>
+    </tr>
+    <tr>
+        <td>折旧成本:</td>
+        <td><input id="TextZhe" type="text" /></td>
+    </tr>
+    <tr>
+        <td>其他费用:</td>
+        <td><input id="TextQi" type="text" /></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input id="ButtonBao" type="button" value="保存" class="btn btn-outline-info" /></td>
+    </tr>
+</table>
+<script>
+    $("#ButtonBao").click(function () {
+        var c = {};
+        c.Fuel       = $("#TextRan").val();
+        c.Repair       = $("#TextXiu").val();
+        c.Through      = $("#TextTong").val();
+        c.Depreciation       = $("#TextZhe").val();
+        c.Other        = $("#TextQi").val();
+        $.ajax({
+            url: "http://localhost:8648/api/AddCost",
+            data: c,
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data > 0) {
+                    alert("成本添加成功");
+                    location.href = "/Cost/GetList";
+                }
+                else {
+                    alert("成本添加失败");
+                    return;
+                }
+            }
+
+        })
+    })
+</script>

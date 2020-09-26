@@ -31,5 +31,6 @@ namespace LogisticsVehicleManagementMVC.Controllers
             ViewBag.ls = ids;
             return View();
         }
+        
     }
 }

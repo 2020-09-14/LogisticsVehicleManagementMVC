@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewData["Title"] = "Upt";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<h1>Upt</h1>
+<input type="hidden" id="hi" value="@ViewBag.Is" />
+<table class="table table-primary">
+    <tr>
+        <td>燃油成本:</td>
+        <td><input id="TextRan" type="text" /></td>
+    </tr>
+    <tr>
+        <td>修理成本:</td>
+        <td><input id="TextXiu" type="text" /></td>
+    </tr>
+    <tr>
+        <td>通行成本:</td>
+        <td><input id="TextTong" type="text" /></td>
+    </tr>
+    <tr>
+        <td>折旧成本:</td>
+        <td><input id="TextZhe" type="text" /></td>
+    </tr>
+    <tr>
+        <td>其他费用:</td>
+        <td><input id="TextQi" type="text" /></td>
+    </tr>
+   
+    <tr>
+        <td></td>
+        <td><input id="ButtonBao" type="button" value="保存" onclick="Bao()" class="btn btn-outline-dark" /></td>
+    </tr>
+</table>
+<script>
+    
+    fantian();
+    function fantian() {
+        var ids = $("#hi").val();
+        $.ajax({
+            url: "http://localhost:8648/api/fantiancost?ids="+ids,
+            type: "get",
+            dataType:"json",
+            success: function (d) {
+                for (var i = 0; i < d.length; i++) {
+                    $("#TextRan").val(d[i].Fuel);
+                    $("#TextXiu").val(d[i].Repair);
+                    $("#TextTong").val(d[i].Through);
+                    $("#TextZhe").val(d[i].Depreciation);
+                    $("#TextQi").val(d[i].Other);
+                }
+            }
+        })
+    }
+    function Bao() {
+        var cost = {};
+        cost.Id = $("#hi").val();
+        cost.Fuel = $("#TextRan").val();
+        cost.Repair = $("#TextXiu").val();
+        cost.Through = $("#TextTong").val();
+        cost.Depreciation = $("#TextZhe").val();
+        cost.Other= $("#TextQi").val();
+        $.ajax({
+            url: "http://localhost:8648/api/UpdateCost",
+            type: "post",
+            data: cost,
+            dataType: "text",
+            success: function (data) {
+                if (data > 0) {
+                    alert("修改成功");
+                    location.href = "/Cost/GetList";
+                }
+                else {
+                    alert("修改失败");
+                    return;
+                }
+            }
+        })
+    }
+</script>
+

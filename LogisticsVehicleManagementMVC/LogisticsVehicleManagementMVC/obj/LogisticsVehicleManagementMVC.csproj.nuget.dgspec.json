@@ -1,6 +1,19 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
+    "E:\\专高五练习\\哈哈哈\\小组项目成本\\MVC\\.git\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj": {}
+  },
+  "projects": {
+    "E:\\专高五练习\\哈哈哈\\小组项目成本\\MVC\\.git\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\专高五练习\\哈哈哈\\小组项目成本\\MVC\\.git\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj",
+        "projectName": "LogisticsVehicleManagementMVC",
+        "projectPath": "E:\\专高五练习\\哈哈哈\\小组项目成本\\MVC\\.git\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj",
+        "packagesPath": "C:\\Users\\MECHREVO\\.nuget\\packages\\",
+        "outputPath": "E:\\专高五练习\\哈哈哈\\小组项目成本\\MVC\\.git\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\obj\\",
+=======
     "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj": {}
   },
   "projects": {
@@ -12,12 +25,17 @@
         "projectPath": "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC.csproj",
         "packagesPath": "C:\\Users\\T\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\T\\Desktop\\项目MVC\\LogisticsVehicleManagementMVC\\LogisticsVehicleManagementMVC\\obj\\",
+>>>>>>> d585be6e740f028e42d7c80ba2d939a7af67988e
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
+<<<<<<< HEAD
+          "C:\\Users\\MECHREVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
           "C:\\Users\\T\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> d585be6e740f028e42d7c80ba2d939a7af67988e
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

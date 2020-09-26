@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "GetList";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<h1>成本显示</h1>
+<table class="table table-bordered">
+    <thead class="table table-info">
+        <tr>
+            <td>燃料成本</td>
+            <td>修理成本</td>
+            <td>通行成本</td>
+            <td>折旧成本</td>
+            <td>其他费用</td>
+            <td style="color:red;font-weight:bold">总和</td>
+            <td>操作</td>
+        </tr>
+    </thead>
+    <tbody id="table" class="table table-primary" >
+    </tbody>
+</table>
+<script>
+    Show();
+    function Show() {
+        $.ajax({
+            url: "http://localhost:8648/api/GetCost",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $("#table").empty();
+                $(data).each(function (index, ele) {
+                    var tr = '<tr>'
+                        + '<td>' + ele.Fuel + '</td>'
+                        + '<td>' + ele.Repair + '</td>'
+                        + '<td>' + ele.Through + '</td>'
+                        + '<td>' + ele.Depreciation + '</td>'
+                        + '<td>' + ele.Other + '</td>'
+                        + '<td style="color:red;font-weight:bold">' + Number(ele.Fuel + ele.Repair + ele.Through + ele.Depreciation + ele.Other) + '</td>'
+                        + '<td><input id="Buttondel" type="button" value="删除" onclick="Del(' + this.Id + ')" class="btn btn-outline-danger" /><input id="Buttonupt" type="button" value="修改" onclick="Upt(' + this.Id + ')" class="btn btn-outline-primary" /><input id="ButtonAdd" type="button" value="添加" onclick="Add(' + this.Id + ')" class="btn btn-outline-secondary" /></td>'
+                        + '</tr>';
+                    $("#table").append(tr);
+                })
+            }
+        })
+    }
+    function Upt(ids) {
+        location.href = "/Cost/Upt?ids="+ids;
+    }
+    function Add() {
+        location.href = "/Cost/Add";
+    }
+    function Del(Ids) {
+        $.ajax({
+            url: "http://localhost:8648/api/DeleteCost",
+            type: "get",
+            data: { Ids: Ids },
+            dataType: "json",
+            success: function (data) {
+                if (data > 0) {
+                    alert("删除成功");
+                    location.reload();
+                }
+                else {
+                    alert("删除失败");
+                    return;
+                }
+            }
+        })
+    }
+</script>
