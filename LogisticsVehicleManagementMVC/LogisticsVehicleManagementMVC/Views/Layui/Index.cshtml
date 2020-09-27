@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<link href="~/layui-v2.5.6/layui/css/layui.css" rel="stylesheet" />
+<div class="layui-carousel" id="test1">
+    <div carousel-item>
+        <div><img src="/img/2cdb7b2bb5f8ba6695d7c6a7bb5d135c.png" alt="" style="width: 100%;height: auto" /></div>
+        <div><img src="~/img/6c2dcb1cd022f0401e85c923d922715b.png" alt="" style="width: 100%;height: auto" /></div>
+        <div><img src="/img/8371e6aee9faf7c1da3e977f8cac7a8f.png" alt="" style="width: 100%;height: auto" /></div>
+        <div><img src="/img/bb3bec981b0c5e9b6a73c85ce08bb718.png" alt="" style="width: 100%;height: auto" /></div>
+        <div><img src="/img/e8fd7cda08d2e99c81a996d32c4b6db2.png" alt="" style="width: 100%;height: auto" s/></div>
+    </div>
+</div>
+<div>
+    <div>
+        <img src="~/img/2cdb7b2bb5f8ba6695d7c6a7bb5d135c.png" style="width: 400px;height: 400px" />
+    </div>
+    <div>
+<img src="~/img/6c2dcb1cd022f0401e85c923d922715b.png" style="width: 400px;height: 400px" /></div>
+    <div>
+        <img src="~/img/8371e6aee9faf7c1da3e977f8cac7a8f.png" style="width: 400px;height: 400px" />
+    </div>
+    <div>
+        <img src="~/img/bb3bec981b0c5e9b6a73c85ce08bb718.png" style="width: 400px;height: 400px" />
+    </div>
+    <div>
+        <img src="~/img/e8fd7cda08d2e99c81a996d32c4b6db2.png" style="width: 400px;height: 400px" />
+    </div>
+    
+</div>
+<script src="~/layui-v2.5.6/layui/layui.js"></script>
+<script>
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            , width: '100%' //设置容器宽度
+            , arrow: 'always' //始终显示箭头
+            , width: '778px'
+            , height: '440px'
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+</script>

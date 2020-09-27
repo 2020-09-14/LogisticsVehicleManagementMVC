@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1>Add</h1>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<table>
+    <tr>
+        <td>驾驶员姓名</td>
+        <td><input type="text" id="Dname" /></td>
+    </tr>
+    <tr>
+        <td>驾驶员电话</td>
+        <td><input type="text" id="Dphone" /></td>
+    </tr>
+    <tr>
+        <td>车票编号</td>
+        <td><input type="text" id="Dlon" /></td>
+    </tr>
+    <tr>
+        <td>驾照编号</td>
+        <td><input type="text" id="Dzno" /></td>
+    </tr>
+    <tr>
+        <td>性别</td>
+        <td>
+            <input type="radio" name="Dsex" value="男" />男
+            <input type="radio" name="Dsex" value="女" />女
+        </td>
+    </tr>
+    <tr>
+        <td>出生年月</td>
+        <td><input type="datetime-local" id="Dbirthday" /></td>
+    </tr>
+    <tr>
+        <td>准驾车型</td>
+        <td><input type="text" id="Dtype" /></td>
+    </tr>
+    <tr>
+        <td>车辆载重</td>
+        <td><input type="text" id="Dload" /></td>
+    </tr>
+    <tr>
+        <td>是否</td>
+        <td>
+            <input type="radio" name="DBit" value="是" />是
+            <input type="radio" name="DBit" value="否" />否
+        </td>
+    </tr>
+    <tr>
+        <td><input type="button" value="添加" onclick="Add()" /></td>
+        <td></td>
+    </tr>
+</table>
+<script>
+    function Add() {
+        var driver = {};
+        driver.Dname = $("#Dname").val();
+        driver.Dphone = $("#Dphone").val();
+       
+        driver.Dlon = $("#Dlon").val();
+        driver.Dzno = $("#Dzno").val();
+        driver.Dsex = $(".Dsex").val();
+        driver.Dbirthday = $("#Dbirthday").val();
+        driver.Dtype = $("#Dtype").val();
+        driver.Dload = $("#Dload").val();
+        driver.DBit = $(".DBit").val();
+        $.ajax({
+            url: 'http://localhost:8648/api/AddDriver',
+            data: { driver: driver },
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                if (data > 0) {
+                    alert("添加成功");
+                    location.href = "/DriverListController1/Index";
+                }
+                else {
+                    alert("添加失败");
+                    return;
+                }
+            }
+        })
+    }
+</script>

@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewData["Title"] = "Upt";
+}
+
+<h1>Upt</h1>
+<input type="hidden" id="Did" value="@ViewBag.Id" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<table>
+    <tr>
+        <td>驾驶员姓名</td>
+        <td><input type="text" id="Dname" /></td>
+    </tr>
+    <tr>
+        <td>驾驶员电话</td>
+        <td><input type="text" id="Dphone" /></td>
+    </tr>
+    <tr>
+        <td>车票编号</td>
+        <td><input type="text" id="Dlon" /></td>
+    </tr>
+    <tr>
+        <td>驾照编号</td>
+        <td><input type="text" id="Dzno" /></td>
+    </tr>
+    <tr>
+        <td>性别</td>
+        <td>
+            <input id="Dsex" type="radio" value="男" checked="checked"/>男
+            <input id="Dsex" type="radio" value="女" />女
+        </td>
+    </tr>
+    <tr>
+        <td>出生年月</td>
+        <td><input type="datetime-local" id="Dbirthday" /></td>
+    </tr>
+    <tr>
+        <td>准驾车型</td>
+        <td><input type="text" id="Dtype" /></td>
+    </tr>
+    <tr>
+        <td>车辆载重</td>
+        <td><input type="text" id="Dload" /></td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="button" value="添加" id="Upt"/></td>
+        <td></td>
+    </tr>
+</table>
+<script>
+    Fantain();
+    function Fantain()
+    {
+        var Did = $("#Did").val();
+        $.ajax({
+            url: 'http://localhost:8648/api/FnaDeriver',
+            data: { DId: Did },
+            dataType: 'json',
+            type: 'psot',
+            success: function (d) {
+                for (var i = 0; i < d.length; i++) {
+                    $("#Did").val(d[i].DId);
+                    $("#Dname").val(d[i].Dname);
+                    $("#Dphone").val(d[i].Dphone);
+                    $("#Dlon").val(d[i].Dlon);
+                    $("#Dzno").val(d[i].Dzno);
+                    $("#Dsex").val(d[i].Dsex);
+                    $("#Dbirthday").val(d[i].Dbirthday);
+                    $("#Dtype").val(d[i].Dtype);
+                    $("#Dload").val(d[i].Dload);
+                }
+               
+            }
+        })
+    }
+    function Upt()
+    {
+        var driver = {};
+        driver.DId = $("#Did").val();
+        driver.Dname = $("#Dname").val();
+        driver.Dphone = $("#Dphone").val();
+        driver.Dlon = $("#Dlon").val();
+        driver.Dzno = $("#Dzno").val();
+        driver.Dsex = $("#Dsex").val();
+        driver.Dbirthday = $("#Dbirthday").val();
+        driver.Dtype = $("#Dtype").val();
+        driver.Dload = $("#Dload").val();
+        $.ajax({
+            url: 'http://localhost:8648/api/UptDeriver',
+            data: { driver: driver },
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                if (data > 0) {
+                    alert("修改成功");
+                    location.href = '/DriverListController1/Index';
+                }
+                else {
+                    alert("修改失败");
+                    return;
+                }
+            }
+        })
+    }
+</script>

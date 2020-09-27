@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewData["Title"] = "Show";
+}
+
+<h1>Show</h1>
+<input type="button" value="跳转添加" onclick="location.href='/DriverListController1/Add'"/>
+<input type="text" id="Dname" />
+<input type="button" value="查询" onclick="Shwo()" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <td>驾驶员编号</td>
+            <td>驾驶员姓名</td>
+            <td>驾驶员电话</td>
+            <td>车牌编号</td>
+            <td>驾照编号</td>
+            <td>性别</td>
+            <td>出生年月</td>
+            <td>准驾车型</td>
+            <td>车辆载重</td>
+            <td>状态</td>
+            <td>操作</td>
+        </tr>
+    </thead>
+    <tbody id="tb">
+    </tbody>
+</table>
+<!-- 模态框 -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title">人员信息详细</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- 模态框主体 -->
+            <div class="modal-body">
+                <table id="table">
+                </table>
+            </div>
+            <!-- 模态框底部 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        Shwo();
+    })
+    function Shwo() {
+        var Dname = $("#Dname").val();
+        $.ajax({
+            url: 'http://localhost:8648/API/DriverList/GetShow',
+            data: { Dname: Dname },
+            dataType: 'JSON',
+            type: 'get',
+            success: function (data, DBit) {
+                $("#tb").empty();
+                $(data).each(function () {
+                    if (this.DBit == true) {
+                        var html = '<tr class="table-primary">';
+                        html += '<td>' + this.DId + '</td>';
+                        html += '<td>' + this.Dname + '</td>';
+                        html += '<td>' + this.Dphone + '</td>';
+                        html += '<td>' + this.Dlon + '</td>';
+                        html += '<td>' + this.Dzno + '</td>';
+                        html += '<td>' + this.Dsex + '</td>';
+                        html += '<td>' + this.Dbirthday + '</td>';
+                        html += '<td>' + this.Dtype + '</td>';
+                        html += '<td>' + this.Dload + '</td>';
+                        html += '<td>' + (this.DBit = false ? "已删除" : "未删除") + '</td>';
+                        html += '<td><input type="button" value="删除" onclick="Del(' + this.DId + ')"/><input type="button" value="修改" onclick="Eid(' + this.DId + ')"/><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="data(' + this.DId + ')">详情</button></td>';
+                        html += '</tr>';
+                        $("#tb").append(html);
+                    }
+                })
+            }
+        })
+    }
+    //删除
+    function Del(Did) {
+        if (confirm("确定删除吗")) {
+            $.ajax({
+                url: 'http://localhost:8648/api/DriverList/DelDeriver',
+                dataType: 'json',
+                type: 'get',
+                data: { Did: Did },
+                success: function (data) {
+                    if (data > 0) {
+                        alert("删除成功");
+                        Shwo();
+                    }
+                    else {
+                        alert("删除失败");
+                        return;
+                    }
+                }
+            })
+        }
+    }
+    //修改
+    function Eid(Did) {
+        location.href = '/DriverListController1/Upt?Did=' + Did;
+    }
+    //模态框
+    function data(id) {
+        $.ajax({
+            url: 'http://localhost:8648/API/DriverList/GetDetails',
+            dataType: 'json',
+            type: 'get',
+            data: { id: id },
+            success: function (data) {
+                $("#table").empty();
+                $(data).each(function () {
+                    var html = '<tr>';
+                    html += '<td>编号：' + this.DId + '</td>';;
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '<td>驾驶员姓名：' + this.Dname + '<td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '<td>手机号：' + this.Dphone + '<td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '<td>车牌编号：' + this.Dlon + '<td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '<td>驾照编号：' + this.Dzno + '<td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '<td>性别：' + this.Dsex + '<td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '<td>出生年月：' + this.Dbirthday + '<td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '<td>准驾车型：' + this.Dtype + '<td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '<td>车辆载重：' + this.Dload + '<td>';
+                    html += '</tr>';
+                    $("#table").append(html);
+                })
+            }
+        })
+    }
+</script>
