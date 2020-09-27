@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewData["Title"] = "Amend";
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 重置文件 -->
+    <link href="~/Deng/Zhao/css/normalize.css" rel="stylesheet" />
+    <link href="~/Deng/Zhao/css/style.css" rel="stylesheet" />
+    <title>注册</title>
+    @* 验证码 *@
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    <style>
+        .input-code {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="reg_div">
+        <p>找回密码</p>
+        <ul class="reg_ul">
+            <li>
+                <span>注册号码：</span>
+                <input id="txtDian" type="text" name="" value="" placeholder="请输入注册账号的手机号" class="reg">
+
+            </li>
+            <li>
+                <span>新密码：</span>
+                <input id="txtMi" type="password" name="" value="" placeholder="请输入新密码" class="reg_password">
+            </li>
+            <li>
+                <span>确认密码：</span>
+                <input id="txtMi2" type="password" name="" value="" placeholder="确认密码" class="reg">
+            </li>
+            <li>
+                <span>身份证号：</span>
+                <input id="txtShen" type="text" name="" value="" placeholder="请输入身份证号码" class="reg">
+            </li>
+
+            <li>
+                <button id="btnZhao" type="button" name="button" class="red">找回密码</button>
+            </li>
+            <li>
+                <button id="btnFan" type="button" name="button" class="red">返回</button>
+            </li>
+        </ul>
+        <center>
+            <br>
+            <div>
+                <input id="txtYan" type="text" class="input-code" placeholder="验证码">
+                
+                <span class="code" title="点击切换" style="width: 120px; padding: 1px; text-align: center; display: inline-block; background-color: rgb(208, 217, 249); cursor: pointer; opacity: 0.6;">
+                    <span style="padding:0 2px;color:#74675a;display:inline-block;transform:rotate(-29deg);">V</span>
+                    <span style="padding:0 2px;color:#169b9a;display:inline-block;transform:rotate(-10deg);">2</span>
+                    <span style="padding:0 2px;color:#654321;display:inline-block;transform:rotate(19deg);">H</span>
+                    <span style="padding:0 2px;color:#74675a;display:inline-block;transform:rotate(25deg);">Q</span>
+                    <span style="padding:0 2px;color:#2ae3e0;display:inline-block;transform:rotate(-1deg);">2</span>
+                    <span style="padding:0 2px;color:#654321;display:inline-block;transform:rotate(11deg);">7</span>
+                    <input placeholder="" value="V2HQ27" type="hidden">
+                </span>
+            </div>
+        </center>
+        <script src="~/Deng/Yan/js/jquery.min.js"></script>
+        <script src="~/Deng/Yan/js/jquery.code.js"></script>
+    </div>
+    <script src="~/Deng/Zhao/js/jquery.min.js"></script>
+    <script src="~/Deng/Zhao/js/script.js"></script>
+
+</body>
+</html>
+
+
+<script>
+    //验证码
+    $(function () {
+        $('.code').createCode({
+            len: 6
+        });
+    });
+    $('.input-code').blur(function () {
+        if ($(this).val().toLowerCase() !== $('.code').children('input').val().toLowerCase()) {
+            alert('验证码不正确')
+        } else {
+            alert('验证通过')
+        }
+    })
+
+
+    $("#btnZhao").click(function () {
+        var Mito = $("#txtMi2").val();
+        var yan = $("#txtYan").val();
+
+        
+
+        var Phone = $("#txtDian").val();
+        var Cipher = $("#txtMi").val();
+        var IDnumber = $("#txtShen").val();
+
+        if (Phone == "" || Phone == null) {
+            alert('手机号码不能为空');
+            return;
+        }
+        if (Cipher == "" || Cipher == null) {
+            alert('密码不能为空！');
+            return;
+        }
+        if (Mito != Cipher) {
+            alert('两次密码不一致！');
+            return;
+        }
+        if (IDnumber == "" || IDnumber == null) {
+            alert('身份证号码不能为空！');
+            return;
+        }
+        if (yan == "" || yan == null) {
+            alert('验证码不能为空！');
+            return;
+        }
+
+        $.ajax({
+            url: 'http://localhost:8648/api/Amend',
+            type: 'post',
+            //dataType: 'Json',
+            data: { Cipher: Cipher, IDnumber: IDnumber, Phone: Phone },
+            success: function (d) {
+                if (d > 0) {
+                    alert('修改成功！');
+                    window.location.href = "It";
+                }
+                else {
+                    alert('手机号或身份证号错误！');
+                }
+            }
+        })
+    })
+
+    $("#btnFan").click(function () {
+        window.location.href = "It";
+    })
+</script>
+

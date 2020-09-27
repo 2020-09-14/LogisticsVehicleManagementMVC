@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewData["Title"] = "It";
+}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鬼泣</title>
+    <link href="~/Deng/qi/css/style.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+    @* 验证码 *@
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    <style>
+        .input-code {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <!--背景-->
+    <div class="wel" id="background-3"></div>
+    <!--左右两边云-->
+    <div class="wel" id="box">
+        <div class="box-1 lefp"></div>
+        <div class="box-1">
+            <div class="righp"></div>
+        </div>
+    </div>
+    <!--荧光点点-->
+    <div class="wel" id="git"></div>
+    <!--登录注册表-->
+    <div class="wel" id="from">
+        <div class="box-2 le-1">
+            <form action="" method="post">
+                <div class="flrg">
+                    <h3>登录</h3>
+                    <div class="a">
+                        <!--<label>账号：</label>-->
+                        <input id="txtName" type="text" class="in-1" placeholder="请输入账号">
+                    </div>
+                    <div class="a">
+                        <!--<label>密码：</label>-->
+                        <input id="txtPwd" type="password" class="in-1" placeholder="请输入密码">
+                    </div>
+                    <div>
+                        <center>
+                            <br>
+                            <div>
+                                <input id="txtYan" type="text" class="input-code" placeholder="验证码">
+
+                                <span class="code" title="点击切换" style="width: 120px; padding: 1px; text-align: center; display: inline-block; background-color: rgb(208, 217, 249); cursor: pointer; opacity: 0.6;">
+                                    <span style="padding:0 2px;color:#74675a;display:inline-block;transform:rotate(-29deg);">V</span>
+                                    <span style="padding:0 2px;color:#169b9a;display:inline-block;transform:rotate(-10deg);">2</span>
+                                    <span style="padding:0 2px;color:#654321;display:inline-block;transform:rotate(19deg);">H</span>
+                                    <span style="padding:0 2px;color:#74675a;display:inline-block;transform:rotate(25deg);">Q</span>
+                                    <span style="padding:0 2px;color:#2ae3e0;display:inline-block;transform:rotate(-1deg);">2</span>
+                                    <span style="padding:0 2px;color:#654321;display:inline-block;transform:rotate(11deg);">7</span>
+                                    <input placeholder="" value="V2HQ27" type="hidden">
+                                </span>
+                            </div>
+                        </center>
+                        <script src="~/Deng/Yan/js/jquery.min.js"></script>
+                        <script src="~/Deng/Yan/js/jquery.code.js"></script>
+                    </div>
+                    <div class="a">
+                        <button id="btnDeng" type="button">登录</button>
+                    </div>
+                    <div class="a">
+                        <div class="hr"></div>
+                    </div>
+                    <div class="a">
+                        <a href="/Account/Amend">忘记密码？</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="box-2 le-2">
+            <form action="" method="post">
+                <div class="flrg-1">
+                    <h3>注册</h3>
+                    <div class="a">
+                        <input id="txtZName" type="text" class="in-1" placeholder="您的用户名">
+                    </div>
+                    <div class="a">
+                        <input id="txtZPwd" type="password" class="in-1" placeholder="输入密码">
+                    </div>
+                    <div class="a">
+                        <input id="txtZPwd2" type="password" class="in-1" placeholder="再次确认密码">
+                    </div>
+                    <div class="a">
+                        <input id="txtHao" type="text" class="in-1" placeholder="输入手机号码">
+                    </div>
+                    <div class="a">
+                        <input id="txtShen" type="email" class="in-1" placeholder="请输入身份证号码">
+                    </div>
+                    <div class="a">
+                        <button id="btnZhu" type="button">注册</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+<script>
+    $("#btnDeng").click(function () {
+
+        var SName = $("#txtName").val();
+        var SPwd = $("#txtPwd").val();
+
+        if (SName == "" || SName == null) {
+            alert('用户名不能为空！');
+            return;
+        }
+
+        if (SPwd == "" || SPwd == null) {
+            alert('密码不能为空！');
+            return;
+        }
+
+        $.ajax({
+            url: 'http://localhost:8648/api/Login',
+            type: 'get',
+            dataType: 'Json',
+            data: { SName: SName, SPwd: SPwd },
+            success: function (d) {
+                if (d > 0) {
+                    alert('登陆成功！');
+
+                }
+                else {
+                    alert('登陆失败！');
+                }
+            }
+        })
+    })
+
+    $("#btnZhu").click(function () {
+        var Pwd = $("#txtZPwd2").val();
+        var obj = {};
+
+        obj.LoginID = $("#txtZName").val();
+        obj.Cipher = $("#txtZPwd").val();
+        obj.Phone = $("#txtHao").val();
+        obj.IDnumber = $("#txtShen").val();
+
+        if (obj.LoginID == "" || obj.LoginID == null) {
+            alert('用户名不能为空！');
+            return;
+        }
+        if (obj.Cipher == "" || obj.Cipher == null) {
+            alert('密码不能为空！');
+            return;
+        }
+        if (Pwd != obj.Cipher) {
+            alert('两次密码不一致！');
+            return;
+        }
+        if (obj.Phone == "" || obj.Phone == null) {
+            alert('手机号不能为空！');
+            return;
+        }
+        if (obj.IDnumber == "" || obj.IDnumber == null) {
+            alert('身份证号不能为空！');
+            return;
+        }
+        
+        
+
+        $.ajax({
+            url: 'http://localhost:8648/api/Boarding',
+            type: 'post',
+            //dataType: 'Json',
+            data: obj,
+            success: function (d) {
+                if (d > 0) {
+                    alert('注册成功！');
+                    window.location.href = "It";
+                }
+                else {
+                    alert('注册失败!');
+                }
+            }
+        })
+
+    })
+</script>

@@ -1,0 +1,222 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>登录</h1>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="~/Deng/Scripts/jquery-3.3.1.js"></script>
+    
+    <script src="~/Deng/Scripts/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>txt</title>
+
+    <link href="~/Deng/css/style.css" rel="stylesheet" />
+
+    <script src="~/Deng/js/jquery.min.js"></script>
+    <script src="~/Deng/js/vector.js"></script>
+
+</head>
+<body>
+    <div id="container">
+        <div id="output">
+            <div class="containerT">
+                <h1>用户登录</h1>
+                <form class="form" id="entry_form">
+                    <input type="text" placeholder="用户名" id="txtName" value="">
+                    <input type="password" placeholder="密码" id="txtPwd">
+                    <button type="button" id="btnDeng">登录</button>
+
+                    <div>
+                        <span>没有账号？</span>
+                        <a data-toggle="modal" data-target="#myModal" href="">立即注册</a>
+                    </div>
+                    <div>
+                        <a href="/Account/Amend">找回密码</a>
+                    </div>
+                    <div id="prompt" class="prompt"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框（Modal） -->
+    <div  class="modal fade;modal-backdrop in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+
+                    </h4>
+
+                </div>
+                <!-- 模态体（Modal） -->
+            <div class="modal-body">
+                  <style type="text/css">
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                font: 16px/20px microsft yahei;
+            }
+        .wrap {
+            width: 30%;
+            height: 80%;
+            padding: 10% 0;
+            position: fixed;
+            opacity: 1;
+            background: linear-gradient(to bottom right,#53e3a6, #ff6a00);
+            background: -webkit-linear-gradient(to bottom right,#50a3a2,#53e3a6);
+        }
+      
+            
+            .container input {
+                width: 320px;
+                display: block;
+                height: 36px;
+                border: 0;
+                outline: 0;
+                padding: 6px 10px;
+                line-height: 24px;
+                margin: 32px auto;
+                -webkit-transition: all 0s ease-in 0.1ms;
+                -moz-transition: all 0s ease-in 0.1ms;
+                transition: all 0s ease-in 0.1ms;
+            }                                               
+                    </style>
+                    <div class="wrap">
+                        <div class="container">
+                            <form>
+                                <input id="txtSName" type="text" placeholder="用户名 Your username" />
+                                <input id="txtJi" type="text" placeholder="手机号 cell-phone number" />
+                                <input id="txtShen" type="text" placeholder="身份证号码 ID number" />
+                                <input id="txtDpwd" type="password" placeholder="密码 password" />
+                                <input id="txtDpwd2" type="password" placeholder="确认密码 Please confirm your password" />
+                                <input id="btnZhu" type="button" value="注册" />
+                                <input type="button" class="" data-dismiss="modal" value="返回" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                    <!-- 模态尾（Modal） -->
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-default" data-dismiss="modal">
+                            关闭
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            提交更改
+                        </button>*@
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+    
+
+
+    <script type="text/javascript">
+        $(function () {
+            Victor("container", "output");   //登录背景函数
+            $("#entry_name").focus();
+            $(document).keydown(function (event) {
+                if (event.keyCode == 13) {
+                    $("#entry_btn").click();
+                }
+            });
+        });
+    </script>
+    <div style="text-align:center;">
+        <p>更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+    </div>
+</body>
+</html>
+
+<script>
+    $("#btnDeng").click(function () {
+
+        var SName = $("#txtName").val();
+        var SPwd = $("#txtPwd").val();
+
+        if (SName == "" || SName == null) {
+            alert('用户名不能为空！');
+            return;
+        }
+
+        if (SPwd == "" || SPwd == null) {
+            alert('密码不能为空！');
+            return;
+        }
+
+        $.ajax({
+            url: 'http://localhost:8648/api/Login',
+            type: 'get',
+            dataType: 'Json',
+            data: { SName: SName, SPwd: SPwd },
+            success: function (d) {
+                if (d > 0) {
+                    alert('登陆成功！');
+
+                }
+                else {
+                    alert('登陆失败！');
+                }
+            }
+        })
+    })
+
+    $("#btnZhu").click(function () {
+        var Pwd = $("#txtDpwd2").val();
+        var obj = {};
+
+        obj.LoginID = $("#txtSName").val();
+        obj.Cipher = $("#txtDpwd").val();
+        obj.Phone = $("#txtJi").val();
+        obj.IDnumber = $("#txtShen").val();
+        
+        if (obj.LoginID == "" || obj.LoginID == null) {
+            alert('用户名不能为空！');
+            return;
+        }
+        if (obj.Phone == "" || obj.Phone == null) {
+            alert('手机号不能为空！');
+            return;
+        }
+        if (obj.IDnumber == "" || obj.IDnumber == null) {
+            alert('身份证号不能为空！');
+            return;
+        }
+        if (obj.Cipher == "" || obj.Cipher == null) {
+            alert('密码不能为空！');
+            return;
+        }
+        if (Pwd != obj.Cipher) {
+            alert('两次密码不一致！');
+            return;
+        }
+
+        $.ajax({
+            url: 'http://localhost:8648/api/Boarding',
+            type: 'post',
+            //dataType: 'Json',
+            data: obj,
+            success: function (d) {
+                if (d > 0) {
+                    alert('注册成功！');
+                    window.location.href = "Login";
+                }
+                else {
+                    alert('注册失败!');
+                }
+            }
+        })
+
+    })
+
+</script>

@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
+=======
     <None Include="wwwroot\layui\font\iconfont.svg" />
     <None Include="wwwroot\layui\font\iconfont.woff2" />
     <None Include="wwwroot\layui\layui.all.js" />
@@ -32,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+>>>>>>> 390dccb91956e0108a343d7ca2fd4809eab2d701
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
 
